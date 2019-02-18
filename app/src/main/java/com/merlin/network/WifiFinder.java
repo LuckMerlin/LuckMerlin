@@ -63,7 +63,6 @@ public class WifiFinder extends WifiNetwork{
                         mFindCheckAgain=null;
                         return null;
                     }
-                    Debug.D(getClass()," %%%%%%%%%%%%%%%%%%%%% "+scanSSID+" "+ssid);
                 }
             }
             if (null!=mFindCheckAgain){
@@ -72,14 +71,13 @@ public class WifiFinder extends WifiNetwork{
             mFindCheckAgain=null==mFindCheckAgain||null==mFindCheckAgain.mSSID||!ssid.equals(mFindCheckAgain.mSSID)?new CheckAgain(ssid) {
                 @Override
                 public void run() {
-                      findNearby(context,ssid,autoEnable,callback);
+                    findNearby(context,ssid,autoEnable,callback);
                 }
             }:mFindCheckAgain;
             if (mFindCheckAgain.mCanceled){
                 notifyFind(OnWifiFindFinish.WIFI_FIND_FAILED_CANCEL,ssid,null,callback);
                 return mFindCheckAgain.mCancel;//Interrupt later codes
             }
-            Debug.D(getClass(),"%%%%%%%%%%%% 查找网络 %%%%%%%%% "+ssid);
             mHandler.postDelayed(mFindCheckAgain,1000);
             return mFindCheckAgain.mCancel;//Interrupt later codes
         }
@@ -104,6 +102,7 @@ public class WifiFinder extends WifiNetwork{
     protected abstract class CheckAgain implements Runnable{
        private final String mSSID;
        private boolean mCanceled=false;
+       private int mCheckCount=0;
 
        private final Cancel mCancel=new Cancel(){
            @Override
