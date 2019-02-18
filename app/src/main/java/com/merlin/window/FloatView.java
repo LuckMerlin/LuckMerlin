@@ -1,4 +1,4 @@
-package com.oujia.window;
+package com.merlin.window;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
