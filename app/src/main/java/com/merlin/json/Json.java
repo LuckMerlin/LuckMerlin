@@ -1,4 +1,10 @@
 package com.merlin.json;
+/**
+ * 2011-2019, LuckMerlin
+ * Author: LuckMerlin
+ * Date: 2019/3/2 13:47
+ * Description:
+ */
 
 import org.json.JSONArray;
 import org.json.JSONException;
